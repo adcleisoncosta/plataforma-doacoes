@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Plataforma de Doações e Solidariedade</title>
+<style>
+:root{--bg:#f6f7fb;--sf:#fff;--tx:#1b2433;--mu:#5b6678;--ln:#e2e6ef;--br:#e0572b;--bi:#fff;--so:#fdece5;--ac:#1d4e89;--ok:#1f8a5b;--ring:#f2b39f;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111723;--sf:#1a2231;--tx:#eaeef6;--mu:#9aa6ba;--ln:#2a3447;--br:#f0713f;--bi:#1a0d06;--so:#3a2219;--ac:#7fb0ea;--ok:#4fc08c;--ring:#7a4a39}}
+:root[data-theme="dark"]{--bg:#111723;--sf:#1a2231;--tx:#eaeef6;--mu:#9aa6ba;--ln:#2a3447;--br:#f0713f;--bi:#1a0d06;--so:#3a2219;--ac:#7fb0ea;--ok:#4fc08c;--ring:#7a4a39}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.w{max-width:1040px;margin:0 auto;padding:0 18px}
+header{background:var(--sf);border-bottom:1px solid var(--ln)}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:14px 0}
+.logo{font-weight:800;font-size:18px}.logo span{color:var(--br)}
+nav{display:flex;gap:4px;flex-wrap:wrap}
+nav button{background:none;border:0;color:var(--mu);font:inherit;font-weight:600;padding:8px 12px;border-radius:10px;cursor:pointer}
+nav button[aria-current=true]{background:var(--so);color:var(--br)}
+h1{font-size:clamp(28px,5vw,42px);line-height:1.12;margin:0 0 12px;letter-spacing:-.02em}
+h2{font-size:22px;margin:0 0 14px}h3{margin:0 0 4px;font-size:17px}
+.mu{color:var(--mu)}
+.hero{padding:40px 0 24px;display:grid;gap:28px;grid-template-columns:1.2fr .8fr;align-items:center}
+@media(max-width:800px){.hero{grid-template-columns:1fr}}
+.btn{background:var(--br);color:var(--bi);border:0;border-radius:12px;padding:12px 20px;font:inherit;font-weight:700;cursor:pointer}
+.btn.g{background:none;border:1.5px solid var(--ln);color:var(--tx)}
+.btn:hover{filter:brightness(1.07)}
+.card{background:var(--sf);border:1px solid var(--ln);border-radius:16px;padding:20px}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+.metas{display:grid;gap:10px}
+.m .r{display:flex;justify-content:space-between;font-size:14px}
+.bar{height:8px;background:var(--so);border-radius:9px;overflow:hidden;margin-top:5px}
+.bar i{display:block;height:100%;background:var(--br);border-radius:9px;transition:width .5s}
+.tag{display:inline-block;font-size:12px;font-weight:700;background:var(--so);color:var(--br);padding:2px 10px;border-radius:99px}
+.need{margin-top:12px;font-size:14px}
+section{padding:16px 0 36px}
+label{display:block;font-weight:600;font-size:14px;margin:14px 0 4px}
+input,select,textarea{width:100%;border:1.5px solid var(--ln);background:var(--bg);color:var(--tx);border-radius:10px;padding:11px 12px;font:inherit}
+input:focus,select:focus,button:focus-visible{outline:3px solid var(--ring);outline-offset:1px}
+.chk{display:flex;gap:10px;align-items:flex-start;font-weight:400;font-size:14px;margin-top:16px}
+.chk input{width:auto;margin-top:4px}
+.two{display:grid;gap:12px;grid-template-columns:1fr 1fr}@media(max-width:600px){.two{grid-template-columns:1fr}}
+.chips{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.chip{border:1.5px solid var(--ln);background:var(--sf);color:var(--tx);border-radius:10px;padding:10px 0;font:inherit;font-weight:600;cursor:pointer}
+.chip[aria-pressed=true]{border-color:var(--br);background:var(--so);color:var(--br)}
+.qr{width:150px;height:150px;margin:14px auto;border-radius:12px;background:repeating-conic-gradient(var(--tx) 0 25%,var(--sf) 0 50%) 0 0/20px 20px;border:8px solid var(--sf);outline:1px solid var(--ln)}
+code{display:block;background:var(--bg);border:1px dashed var(--ln);border-radius:10px;padding:10px;font-size:12px;word-break:break-all;color:var(--mu)}
+.thr{display:grid;gap:8px;margin-top:8px;grid-template-columns:2fr 1.3fr .8fr}
+@media(max-width:600px){.thr{grid-template-columns:1fr 1fr}.thr input:first-child{grid-column:1/-1}}
+.err{color:#c0392b;font-size:14px;min-height:20px;margin:10px 0 0}
+.form{max-width:560px}
+.steps{display:flex;gap:6px;margin-top:12px}
+.steps i{flex:1;height:6px;border-radius:9px;background:var(--ln)}.steps i.on{background:var(--ok)}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.lg li{margin:8px 0}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ok);color:#fff;padding:12px 20px;border-radius:12px;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+footer{border-top:1px solid var(--ln);padding:22px 0;color:var(--mu);font-size:13px;text-align:center}
+</style>
+</head>
+<body>
+<header><div class="w top">
+<div class="logo">🤝 Plataforma de <span>Doações e Solidariedade</span></div>
+<nav id="nav"></nav>
+</div></header>
+<div class="w"><main id="app"></main></div>
+<footer><div class="w">Projeto de Extensão · Bacharelado em Sistemas de Informação · Faculdade Santíssimo Sacramento<br>Em parceria com a Escola Municipal em Tempo Integral João Alves dos Santos · Instituições e campanhas de exemplo, para demonstração.</div></footer>
+<script>
+var CATS=['Alimentos','Higiene','Roupas','Material escolar'];
+var INST=[{id:1,n:'Escola Municipal João Alves dos Santos'},{id:2,n:'Associação Mãos Solidárias'},{id:3,n:'Abrigo Esperança'}];
+var SEED=[
+{id:1,i:1,mg:5000,t:'Cesta Solidária de Fim de Ano',d:'Arrecadação de alimentos para montar cestas básicas para famílias da comunidade escolar.',needs:[{k:'Alimentos',it:'Cestas básicas',un:'cestas',need:60,got:24},{k:'Alimentos',it:'Pacotes de arroz (5 kg)',un:'pacotes',need:80,got:31}]},
+{id:2,i:2,mg:3000,t:'Agasalhos para o Inverno',d:'Roupas e cobertores em bom estado para famílias em situação de vulnerabilidade.',needs:[{k:'Roupas',it:'Cobertores',un:'unidades',need:50,got:12},{k:'Roupas',it:'Agasalhos infantis',un:'peças',need:100,got:45}]},
+{id:3,i:3,mg:2000,t:'Higiene e Dignidade',d:'Kits de higiene pessoal para acolhidos e famílias atendidas.',needs:[{k:'Higiene',it:'Kits de higiene',un:'kits',need:40,got:9},{k:'Material escolar',it:'Kits escolares',un:'kits',need:70,got:28}]}];
+var ST={users:[],insts:[],dons:[],got:{},camps:[],mon:{}};
+try{var s=localStorage.getItem('pds1');if(s)ST=JSON.parse(s)}catch(e){}
+ST.camps=ST.camps||[];ST.mon=ST.mon||{};
+function save(){try{localStorage.setItem('pds1',JSON.stringify(ST))}catch(e){}}
+var $=function(i){return document.getElementById(i)};
+var esc=function(t){return String(t).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
+function brl(v){return 'R$ '+v.toLocaleString('pt-BR',{minimumFractionDigits:v%1?2:0,maximumFractionDigits:2})}
+function totMon(){return Object.keys(ST.mon).reduce(function(a,k){return a+ST.mon[k]},0)}
+function moneyBar(c){var r=ST.mon[c.id]||0;if(!c.mg&&!r)return '';return '<div class="need"><div class="row"><span>Em dinheiro</span><b>'+brl(r)+(c.mg?' / '+brl(c.mg):'')+'</b></div>'+(c.mg?'<div class="bar"><i style="width:'+Math.min(100,r/c.mg*100)+'%"></i></div>':'')+'</div>'}
+function tog(){return '<div class="row" style="justify-content:flex-start;gap:8px;margin-bottom:14px"><button class="btn'+(GM=='i'?'':' g')+'" data-gm="i">Doar itens</button><button class="btn'+(GM=='m'?'':' g')+'" data-gm="m">Doar dinheiro</button></div>'}
+function moneyCard(d){var c=d.c?findCamp(d.c):null;return '<div class="card"><div class="row"><h3>'+brl(d.q)+' em dinheiro</h3><span class="tag">Confirmada</span></div><p class="mu" style="margin:4px 0">'+(c?esc(c.t):'Fundo geral da plataforma')+'<br>Doador(a): '+esc(d.n.split(' ')[0])+' · '+d.m+'</p><p style="color:var(--ok);font-weight:600;margin:12px 0 0">✓ Pagamento simulado confirmado. Obrigado!</p></div>'}
+function allCamps(){return SEED.concat(ST.camps.filter(function(c){return c.st=='ok'}))}
+function findCamp(id){return SEED.concat(ST.camps).find(function(x){return x.id==id})}
+function got(c,j){return (findCamp(c).needs[j].got||0)+(ST.got[c+'-'+j]||0)}
+function instName(id){var a=INST.concat(ST.insts);return (a.find(function(x){return x.id==id})||{}).n||''}
+var VIEWS=[['home','Início'],['camp','Campanhas'],['give','Doar'],['reg','Cadastro'],['newc','Nova campanha'],['track','Minhas doações'],['adm','Validação'],['priv','Privacidade']];
+var view='home',pre=null,ADM=false,GM='i',MV=50,PM=null;
+function go(v,p){view=v;pre=p||null;draw();window.scrollTo(0,0)}
+function toast(m){var t=document.createElement('div');t.className='toast';t.textContent=m;document.body.appendChild(t);setTimeout(function(){t.remove()},2600)}
+function meta(l,v,t){var p=Math.min(100,v/t*100);return '<div class="m"><div class="r"><span>'+l+'</span><b>'+v+' / '+t+'</b></div><div class="bar"><i style="width:'+p+'%"></i></div></div>'}
+function campCard(c,btn){
+ var h='<div class="card"><span class="tag">'+esc(instName(c.i))+'</span><h3 style="margin-top:8px">'+esc(c.t)+'</h3><p class="mu" style="margin:0">'+esc(c.d)+'</p>';
+ c.needs.forEach(function(n,j){var g=got(c.id,j);h+='<div class="need"><div class="row"><span>'+esc(n.it)+' <span class="mu">· '+n.k+'</span></span><b>'+Math.min(g,n.need)+'/'+n.need+'</b></div><div class="bar"><i style="width:'+Math.min(100,g/n.need*100)+'%"></i></div></div>'});
+ return h+moneyBar(c)+(btn?'<div class="row" style="justify-content:flex-start;gap:8px;margin-top:16px"><button class="btn" data-give="'+c.id+'">Doar itens</button><button class="btn g" data-givem="'+c.id+'">Doar dinheiro</button></div>':'')+'</div>'}
+var V={
+home:function(){
+ var tot=0,rec=0;allCamps().forEach(function(c){c.needs.forEach(function(n,j){tot+=n.need;rec+=Math.min(n.need,got(c.id,j))})});
+ return '<div class="hero"><div><span class="tag">Tecnologia a serviço da comunidade</span><h1 style="margin-top:12px">Conectando quem quer ajudar a quem precisa.</h1><p class="mu" style="font-size:18px">Em vez de campanhas espalhadas em grupos de WhatsApp e redes sociais, reunimos doadores, instituições e famílias em um só lugar, com organização, transparência e respeito à privacidade.</p><div class="row" style="justify-content:flex-start;gap:10px;margin-top:20px"><button class="btn" data-go="give">Fazer uma doação</button><button class="btn g" data-go="camp">Ver campanhas</button></div></div>'+
+ '<div class="card"><h3>Metas do projeto</h3><div class="metas" style="margin-top:10px">'+meta('Usuários cadastrados',ST.users.length,50)+meta('Instituições',INST.length+ST.insts.length,3)+meta('Campanhas divulgadas',allCamps().length,2)+meta('Doações registradas',ST.dons.length,20)+'</div></div></div>'+
+ '<section><h2>Como funciona</h2><div class="grid">'+[['1','Cadastre-se','Doadores e instituições criam seu cadastro informando só o necessário.'],['2','Escolha uma campanha','Veja as necessidades por categoria e o quanto já foi arrecadado.'],['3','Registre a doação','Informe o item, a quantidade e como prefere entregar.'],['4','Acompanhe','Veja o andamento até a instituição confirmar o recebimento.']].map(function(x){return '<div class="card"><div class="tag">'+x[0]+'</div><h3 style="margin-top:8px">'+x[1]+'</h3><p class="mu" style="margin:0">'+x[2]+'</p></div>'}).join('')+'</div></section>'+
+ '<section><div class="card row"><div><h3>Arrecadação geral das campanhas</h3><span class="mu">'+rec+' de '+tot+' itens necessários · '+brl(totMon())+' arrecadados em dinheiro (valores demonstrativos)</span></div><button class="btn g" data-go="priv">Como protegemos seus dados</button></div></section>'},
+camp:function(){return '<section><h2>Campanhas ativas</h2><div class="grid">'+allCamps().map(function(c){return campCard(c,1)}).join('')+'</div></section>'},
+give:function(){return GM=='m'?V.giveM():V.giveI()},
+giveI:function(){
+ var c0=pre||allCamps()[0].id;
+ return '<section><h2>Registrar doação</h2>'+tog()+'<form class="card form" id="fg"><label>Campanha</label><select id="gc">'+allCamps().map(function(c){return '<option value="'+c.id+'"'+(c.id==c0?' selected':'')+'>'+esc(c.t)+'</option>'}).join('')+'</select>'+
+ '<label>Item</label><select id="gi"></select><div class="two"><div><label>Quantidade</label><input id="gq" type="number" min="1" value="1"></div><div><label>Entrega</label><select id="gm"><option>Entregarei na instituição</option><option>Solicito retirada</option></select></div></div>'+
+ '<label>Seu nome</label><input id="gn" autocomplete="name"><label>Telefone ou e-mail para contato</label><input id="gt">'+
+ '<label class="chk"><input type="checkbox" id="gk"><span>Concordo com o uso dos meus dados apenas para viabilizar esta doação, conforme a LGPD (Lei nº 13.709/2018).</span></label><p class="err" id="ge" role="alert"></p><button class="btn" type="submit">Registrar doação</button></form></section>'},
+reg:function(){return '<section><h2>Cadastro</h2><form class="card form" id="fr"><label>Você é</label><select id="rt"><option value="u">Doador(a)</option><option value="i">Instituição social</option></select><label>Nome</label><input id="rn"><div class="two"><div><label>E-mail</label><input id="re" type="email"></div><div><label>Telefone</label><input id="rp" inputmode="tel"></div></div><label>Cidade</label><input id="rc" value="Alagoinhas, BA">'+
+ '<label class="chk"><input type="checkbox" id="rk"><span>Autorizo o tratamento dos meus dados para as finalidades da plataforma e estou ciente de que posso solicitar sua exclusão a qualquer momento.</span></label><p class="err" id="rer" role="alert"></p><button class="btn" type="submit">Cadastrar</button></form></section>'},
+track:function(){
+ var L=['Registrada','Em contato com a instituição','Recebida'];
+ if(!ST.dons.length)return '<section><h2>Minhas doações</h2><div class="card"><p class="mu">Você ainda não registrou doações.</p><button class="btn" data-go="give">Fazer a primeira doação</button></div></section>';
+ return '<section><h2>Minhas doações</h2><div class="grid">'+ST.dons.slice().reverse().map(function(d){if(d.t=='m')return moneyCard(d);var c=findCamp(d.c),n=c.needs[d.j];
+ return '<div class="card"><div class="row"><h3>'+d.q+' · '+esc(n.it)+'</h3><span class="tag">'+L[d.s]+'</span></div><p class="mu" style="margin:4px 0">'+esc(c.t)+'<br>Doador(a): '+esc(d.n.split(' ')[0])+' · '+d.m+'</p><div class="steps">'+L.map(function(_,k){return '<i class="'+(k<=d.s?'on':'')+'"></i>'}).join('')+'</div>'+(d.s<2?'<button class="btn g" style="margin-top:14px" data-adv="'+d.id+'">Simular avanço da instituição</button>':'<p style="color:var(--ok);font-weight:600;margin:12px 0 0">✓ Recebida. Obrigado!</p>')+'</div>'}).join('')+'</div></section>'},
+newc:function(){
+ var SL={pend:'Em análise',ok:'Aprovada',no:'Rejeitada'},all=INST.concat(ST.insts);
+ var items=[0,1,2].map(function(k){return '<div class="thr"><input id="ni'+k+'" placeholder="Item '+(k+1)+(k?' (opcional)':'')+'"><select id="nk'+k+'">'+CATS.map(function(c){return '<option>'+c+'</option>'}).join('')+'</select><input id="nq'+k+'" type="number" min="1" placeholder="Qtd"></div>'}).join('');
+ var mine=ST.camps.length?'<h2 style="margin-top:32px">Campanhas enviadas neste navegador</h2><div class="grid">'+ST.camps.slice().reverse().map(function(c){return '<div class="card"><div class="row"><h3>'+esc(c.t)+'</h3><span class="tag">'+SL[c.st]+'</span></div><p class="mu" style="margin:6px 0 0">'+(c.st=='no'?'Motivo: '+esc(c.why):c.st=='ok'?'Já aparece em Campanhas.':'Aguardando análise da coordenação.')+'</p></div>'}).join('')+'</div>':'';
+ return '<section><h2>Cadastrar campanha</h2><form class="card form" id="fc"><p class="mu" style="margin-top:0">Toda campanha passa por <b>validação</b> da coordenação antes de ser publicada. Não inclua nomes, endereços ou dados de famílias beneficiadas.</p><label>Instituição</label><select id="ci">'+all.map(function(x){return '<option value="'+x.id+'">'+esc(x.n)+'</option>'}).join('')+'</select><div class="two"><div><label>Responsável</label><input id="cr"></div><div><label>Telefone ou e-mail</label><input id="cc"></div></div><label>Título da campanha</label><input id="ct" maxlength="70"><label>Descrição</label><textarea id="cd" rows="3" maxlength="240"></textarea><label>Justificativa e forma de distribuição (vista só pela coordenação)</label><textarea id="cj" rows="3" maxlength="300"></textarea><label>Meta em dinheiro (opcional, R$)</label><input id="cm" inputmode="decimal" placeholder="Ex.: 2000"><label>Itens necessários</label>'+items+'<label class="chk"><input type="checkbox" id="ck"><span>Declaro que as informações são verdadeiras, que represento esta instituição e que não incluí dados pessoais de beneficiários (LGPD).</span></label><p class="err" id="ce" role="alert"></p><button class="btn" type="submit">Enviar para validação</button></form>'+mine+'</section>'},
+adm:function(){
+ if(!ADM)return '<section><h2>Validação de campanhas</h2><form class="card form" id="fa"><p class="mu" style="margin-top:0">Área restrita à coordenação do projeto.</p><label>Código de acesso</label><input id="ap" type="password"><p class="err" id="ae" role="alert"></p><button class="btn" type="submit">Entrar</button><p class="mu" style="font-size:13px;margin-bottom:0">Demonstração: use o código 1234. Em produção, seria um login com autenticação no servidor.</p></form></section>';
+ var p=ST.camps.filter(function(c){return c.st=='pend'});
+ return '<section><div class="row"><h2>Aguardando validação ('+p.length+')</h2><button class="btn g" data-out="1">Sair</button></div>'+(p.length?'<div class="grid">'+p.map(function(c){return '<div class="card"><span class="tag">'+esc(instName(c.i))+'</span><h3 style="margin-top:8px">'+esc(c.t)+'</h3><p class="mu" style="margin:0 0 8px">'+esc(c.d)+'</p><p style="font-size:14px;margin:4px 0"><b>Responsável:</b> '+esc(c.r)+' · '+esc(c.c)+'</p><p style="font-size:14px;margin:4px 0"><b>Justificativa:</b> '+esc(c.j)+'</p><p style="font-size:14px;margin:4px 0"><b>Itens:</b> '+c.needs.map(function(n){return esc(n.it)+' ('+n.need+')'}).join(', ')+'</p><input id="rj'+c.id+'" placeholder="Motivo (obrigatório para rejeitar)" style="margin-top:10px"><div class="row" style="justify-content:flex-start;gap:8px;margin-top:10px"><button class="btn" data-ap="'+c.id+'">Aprovar</button><button class="btn g" data-rj="'+c.id+'">Rejeitar</button></div></div>'}).join('')+'</div>':'<div class="card mu">Nenhuma campanha pendente.</div>')+'</section>'},
+giveM:function(){
+ var chips=[25,50,100,250].map(function(v){return '<button type="button" class="chip" data-chip="'+v+'" aria-pressed="'+(MV==v)+'">'+brl(v)+'</button>'}).join('');
+ return '<section><h2>Registrar doação</h2>'+tog()+'<form class="card form" id="fm"><label>Destino da doação</label><select id="mc"><option value="0">Fundo geral da plataforma</option>'+allCamps().map(function(c){return '<option value="'+c.id+'"'+(c.id==pre?' selected':'')+'>'+esc(c.t)+'</option>'}).join('')+'</select><label>Valor</label><div class="chips">'+chips+'</div><input id="mv" inputmode="decimal" placeholder="Outro valor (R$)" style="margin-top:8px"><label>Forma de pagamento</label><select id="mp"><option>Pix</option><option>Cartão</option><option>Boleto</option></select><label>Seu nome</label><input id="mn" autocomplete="name"><label>Telefone ou e-mail para contato</label><input id="mt"><label class="chk"><input type="checkbox" id="mk"><span>Concordo com o uso dos meus dados apenas para registrar esta doação, conforme a LGPD (Lei nº 13.709/2018).</span></label><p class="err" id="me" role="alert"></p><button class="btn" type="submit">Continuar</button><p class="mu" style="font-size:13px;margin-bottom:0">Ambiente de demonstração: nenhum pagamento real é processado.</p></form></section>'},
+priv:function(){return '<section><h2>Proteção de dados e LGPD</h2><div class="card"><p class="mu" style="margin-top:0">Esta plataforma atende famílias em situação de vulnerabilidade. Por isso, a privacidade é parte do projeto, e não um detalhe. Seguimos a Lei nº 13.709/2018 (LGPD):</p><ul class="lg">'+['Coletamos somente os dados realmente necessários.','Informamos a finalidade de cada coleta.','Dados pessoais só são vistos por pessoas autorizadas.','Usamos mecanismos de segurança contra acessos indevidos e vazamentos.','Garantimos transparência sobre o tratamento dos dados.','Nunca expomos informações que identifiquem ou constranjam famílias.'].map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul><p class="mu">Nesta demonstração, os dados ficam apenas no seu navegador e não são enviados a nenhum servidor.</p></div></section>'}};
+function draw(){
+ $('nav').innerHTML=VIEWS.map(function(v){return '<button data-go="'+v[0]+'"'+(v[0]==view?' aria-current="true"':'')+'>'+v[1]+'</button>'}).join('');
+ $('app').innerHTML=V[view]();bind2();
+ if(view=='give'&&GM!='m'){var gc=$('gc'),gi=$('gi');var fill=function(){gi.innerHTML=findCamp(gc.value).needs.map(function(n,j){return '<option value="'+j+'">'+esc(n.it)+' ('+n.un+')</option>'}).join('')};fill();gc.onchange=fill;
+  $('fg').onsubmit=function(e){e.preventDefault();var q=parseInt($('gq').value,10),n=$('gn').value.trim(),t=$('gt').value.trim(),er=$('ge');
+   if(!(q>=1))return er.textContent='Informe uma quantidade válida.';if(n.length<3)return er.textContent='Informe seu nome.';if(t.length<5)return er.textContent='Informe um contato.';if(!$('gk').checked)return er.textContent='É necessário aceitar o uso dos dados para continuar.';
+   ST.dons.push({id:Date.now(),c:+gc.value,j:+gi.value,q:q,n:n,m:$('gm').value,s:0});save();toast('Doação registrada!');go('track')}}
+ if(view=='reg')$('fr').onsubmit=function(e){e.preventDefault();var n=$('rn').value.trim(),m=$('re').value.trim(),er=$('rer');
+  if(n.length<3)return er.textContent='Informe o nome.';if(!/^\S+@\S+\.\S+$/.test(m))return er.textContent='Informe um e-mail válido.';if(!$('rk').checked)return er.textContent='É necessário autorizar o tratamento dos dados.';
+  if($('rt').value=='i')ST.insts.push({id:100+ST.insts.length,n:n});else ST.users.push({id:Date.now(),n:n});save();toast('Cadastro realizado!');go('home')}}
+function bind2(){
+ if(view=='give'&&GM=='m')$('fm').onsubmit=function(e){e.preventDefault();var er=$('me'),n=$('mn').value.trim(),t=$('mt').value.trim(),raw=$('mv').value.trim();
+  if(raw){var v=parseFloat(raw.replace(',','.'));MV=isNaN(v)?0:v}
+  if(!(MV>=5)){er.textContent='O valor mínimo é R$ 5.';return}
+  if(MV>10000){er.textContent='Para valores acima de R$ 10.000, procure a coordenação.';return}
+  if(n.length<3){er.textContent='Informe seu nome.';return}
+  if(t.length<5){er.textContent='Informe um contato.';return}
+  if(!$('mk').checked){er.textContent='É necessário aceitar o uso dos dados para continuar.';return}
+  PM={c:+$('mc').value,q:Math.round(MV*100)/100,n:n,m:$('mp').value};
+  var px=PM.m=='Pix'?'<div class="qr" aria-hidden="true"></div><code>00020126580014br.gov.bcb.pix0136demo-plataforma-doacoes-0000520400005303986</code>':'<p class="mu">Pagamento via '+PM.m+' simulado.</p>';
+  $('app').innerHTML='<section><div class="card form" style="text-align:center"><h2>Confirme sua doação</h2><p style="margin:0">'+brl(PM.q)+' via '+PM.m+'<br><span class="mu">'+(PM.c?esc(findCamp(PM.c).t):'Fundo geral da plataforma')+'</span></p>'+px+'<div class="row" style="justify-content:center;gap:8px;margin-top:14px"><button class="btn" data-pay="ok">Confirmar pagamento (simulado)</button><button class="btn g" data-pay="no">Voltar</button></div></div></section>'};
+ if(view=='newc')$('fc').onsubmit=function(e){e.preventDefault();var er=$('ce'),t=$('ct').value.trim(),d=$('cd').value.trim(),j=$('cj').value.trim(),r=$('cr').value.trim(),c=$('cc').value.trim(),ns=[];
+  for(var k=0;k<3;k++){var nm=$('ni'+k).value.trim(),q=parseInt($('nq'+k).value,10);if(nm&&!(q>=1)){er.textContent='Informe a quantidade do item '+(k+1)+'.';return}if(nm)ns.push({k:$('nk'+k).value,it:nm,un:'unidades',need:q,got:0})}
+  if(t.length<5)return er.textContent='Informe um título (mín. 5 caracteres).';
+  if(d.length<20)return er.textContent='Descreva a campanha (mín. 20 caracteres).';
+  if(j.length<20)return er.textContent='Explique a justificativa e a distribuição (mín. 20 caracteres).';
+  if(r.length<3||c.length<5)return er.textContent='Informe o responsável e um contato.';
+  if(!ns.length)return er.textContent='Inclua pelo menos um item necessário.';
+  if(!$('ck').checked)return er.textContent='É necessário confirmar a declaração.';
+  ST.camps.push({id:Date.now(),i:+$('ci').value,mg:parseFloat(($('cm').value||'').replace(',','.'))||0,t:t,d:d,j:j,r:r,c:c,needs:ns,st:'pend'});save();toast('Campanha enviada para validação.');draw()};
+ if(view=='adm'&&!ADM)$('fa').onsubmit=function(e){e.preventDefault();if($('ap').value==='1234'){ADM=true;draw()}else $('ae').textContent='Código incorreto.'}}
+document.addEventListener('click',function(e){var b=e.target.closest('[data-go],[data-give],[data-adv],[data-ap],[data-rj],[data-out],[data-gm],[data-givem],[data-chip],[data-pay]');if(!b)return;
+ if(b.dataset.go)go(b.dataset.go);else if(b.dataset.give){GM='i';go('give',+b.dataset.give)}
+ else if(b.dataset.gm){GM=b.dataset.gm;draw()}
+ else if(b.dataset.givem){GM='m';go('give',+b.dataset.givem)}
+ else if(b.dataset.chip){MV=+b.dataset.chip;$('mv').value='';document.querySelectorAll('.chip').forEach(function(x){x.setAttribute('aria-pressed',String(x===b))})}
+ else if(b.dataset.pay){if(b.dataset.pay=='ok'){var k=PM.c;ST.mon[k]=(ST.mon[k]||0)+PM.q;ST.dons.push({id:Date.now(),t:'m',c:PM.c,q:PM.q,n:PM.n,m:PM.m,s:1});save();toast('Pagamento simulado confirmado!');go('track')}else draw()}
+ else if(b.dataset.out){ADM=false;draw()}
+ else if(b.dataset.ap||b.dataset.rj){var id=b.dataset.ap||b.dataset.rj,cp=ST.camps.find(function(x){return x.id==id});
+  if(b.dataset.ap)cp.st='ok';else{var rs=$('rj'+id).value.trim();if(rs.length<5){toast('Informe o motivo da rejeição.');return}cp.st='no';cp.why=rs}
+  save();draw();toast(b.dataset.ap?'Campanha aprovada e publicada.':'Campanha rejeitada.')}
+ else{var d=ST.dons.find(function(x){return x.id==b.dataset.adv});d.s++;if(d.s==2){var k=d.c+'-'+d.j;ST.got[k]=(ST.got[k]||0)+d.q}save();draw()}});
+draw();
+</script>
+</body>
+</html>
